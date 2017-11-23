@@ -8,12 +8,13 @@ def score(game):
         else:
             result += get_value(game[i])
         if frame < 10 and get_value(game[i]) == 10:
+            next_score = get_value(game[i+1])
             if game[i] == '/':
-                result += get_value(game[i+1])
+                result += next_score
             elif game[i].lower() == 'x':
-                result += get_value(game[i+1])
+                result += next_score
                 if game[i+2] == '/':
-                    result += 10 - get_value(game[i+1])
+                    result += 10 - next_score
                 else:
                     result += get_value(game[i+2])
         if in_first_half is True:
