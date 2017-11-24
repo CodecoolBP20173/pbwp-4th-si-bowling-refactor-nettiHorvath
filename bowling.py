@@ -10,14 +10,11 @@ def score(game):
             result += get_value(game[i])
         if frame < 10 and get_value(game[i]) == 10:
             spare_or_strike(game, i)
-        if in_first_half is True:
-            in_first_half = False
+        if game[i].lower() == 'x' or in_first_half is False:
+            in_first_half = True
+            frame += 1
         else:
-            in_first_half = True
-            frame += 1
-        if game[i].lower() == 'x':
-            in_first_half = True
-            frame += 1
+            in_first_half = False
     return result
 
 
