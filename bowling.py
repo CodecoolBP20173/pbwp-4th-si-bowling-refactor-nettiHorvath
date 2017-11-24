@@ -1,4 +1,5 @@
 def score(game):
+    global result
     result = 0
     frame = 1
     in_first_half = True
@@ -8,15 +9,7 @@ def score(game):
         else:
             result += get_value(game[i])
         if frame < 10 and get_value(game[i]) == 10:
-            next_score = get_value(game[i+1])
-            if game[i] == '/':
-                result += next_score
-            elif game[i].lower() == 'x':
-                result += next_score
-                if game[i+2] == '/':
-                    result += 10 - next_score
-                else:
-                    result += get_value(game[i+2])
+            spare_or_strike(game, i)
         if in_first_half is True:
             in_first_half = False
         else:
@@ -25,6 +18,20 @@ def score(game):
         if game[i].lower() == 'x':
             in_first_half = True
             frame += 1
+    return result
+
+
+def spare_or_strike(game, i):
+    global result
+    next_value = get_value(game[i+1])
+    if game[i] == '/':
+        result += next_value
+    elif game[i].lower() == 'x':
+        result += next_value
+        if game[i+2] == '/':
+            result += 10 - next_value
+        else:
+            result += get_value(game[i+2])
     return result
 
 
